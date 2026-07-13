@@ -1,87 +1,91 @@
-# AI_web_scrapper_selenium_llama
+AI_web_scrapper_selenium_llama
+
 This project is a Streamlit web application that scrapes website content using Selenium, cleans and processes the data, and then utilizes the Llama 3.2 language model to extract relevant information based on user queries.
 
-### Features:
-
-- Scrapes website content dynamically using `selenium`.
-- Cleans extracted content to remove unnecessary elements, reducing token usage.
-- Splits content into batches of 25,000 characters to comply with LLM input constraints.
-- Passes processed content to Llama 3.2 for answering user queries.
-
-<img width="977" alt="image_1" src="https://github.com/user-attachments/assets/f33278eb-70ac-40ca-8964-1fd100b86c79" />
+Features:
 
 
+Scrapes website content dynamically using selenium.
+Cleans extracted content to remove unnecessary elements, reducing token usage.
+Splits content into batches of 25,000 characters to comply with LLM input constraints.
+Passes processed content to Llama 3.2 for answering user queries.
 
-## Installation
 
-### Prerequisites:
+Installation
 
-- Python 3.8+
-- Install dependencies using:
-  ```bash
-  pip install -r requirements.txt
-  ```
+Prerequisites:
 
-## Usage
 
-Run the Streamlit app with:
-  ```bash
-  streamlit run app.py
-```
+Python 3.8+
+Google Chrome installed (undetected-chromedriver manages the matching driver automatically)
+Ollama installed and running locally, with the Llama 3.2 model pulled:
 
-## Workflow:
 
-1. Enter a website URL in the input field.
+ollama pull llama3.2
 
-2. Click "Scrape Site" to extract and clean content.
+Install Python dependencies:
 
-3. View the cleaned DOM content.
+pip install -r requirements.txt
 
-4. Provide a description of the information you want to extract.
+Usage
 
-5. Click "Parse content" to process the data with Llama 3.2.
+Make sure Ollama is running locally, then start the Streamlit app with:
 
-## Modules
+streamlit run main.py
 
-### scrape.py
+Workflow:
 
-- Uses undetected-chromedriver to fetch and render the webpage.
 
-- Scrolls the page to mimic human behavior.
+Enter a website URL in the input field.
+Click "Scrape Site" to extract and clean content.
+View the cleaned DOM content.
+Provide a description of the information you want to extract.
+Click "Parse content" to process the data with Llama 3.2.
 
-- Extracts the raw HTML content.
 
-### clean.py
+Modules
 
-- Removes unnecessary elements like <script>, <style>, <meta>, <link>, and <noscript>.
+scrape.py
 
-- Strips out navigation bars, footers, and comments.
 
-- Splits large content into chunks of 25,000 characters.
+Uses undetected-chromedriver to fetch and render the webpage.
+Scrolls the page to mimic human behavior.
+Extracts the raw HTML content.
 
-### parse.py
 
-- Uses langchain_ollama to pass text chunks to Llama 3.2.
+clean.py
 
-- Extracts and formats relevant information based on user input.
 
-## Improvements
+Removes unnecessary elements like <script>, <style>, <meta>, <link>, and <noscript> tags.
+Strips out navigation bars, footers, and comments.
+Splits large content into chunks of 25,000 characters.
 
--Implementing a tokenizer to count tokens dynamically before sending requests to the LLM.
 
--Enhancing the extraction process to handle multi-page websites.
+parse.py
 
+
+Uses langchain_ollama to pass text chunks to Llama 3.2.
+Extracts and formats relevant information based on user input.
+
+
+Improvements
+
+
+Implementing a tokenizer to count tokens dynamically before sending requests to the LLM.
+Enhancing the extraction process to handle multi-page websites.
 Introducing caching mechanisms for improved efficiency.
 
-## License
 
-MIT License
+License
 
-## Acknowledgement
+This project is licensed under the MIT License.
+
+Acknowledgement
+
 This project is a derivative work inspired by the excellent tutorial "Python AI Web Scraper Tutorial" by Tech with Tim, available at https://www.youtube.com/watch?v=Oo8-nEuDBkk.
 
-While the core structure of the project is based on Tech with Tim's tutorial, I have made significant modifications, especially regarding the scrapping logic, HTML cleaning and Llama integration.
+While the core structure of the project is based on Tech with Tim's tutorial, I have made significant modifications, especially regarding the scraping logic, HTML cleaning, and Llama integration.
 
-## Note
+Note
 
 To ensure the highest success rate when scraping websites, consider integrating a proxy and captcha solving service like Bright Data, Smart Proxy, or Scraping Ant. These services provide a pool of rotating residential proxies and powerful captcha solvers, which are crucial for bypassing website blocks and CAPTCHAs. While this Selenium-based scraper incorporates a header with a User-Agent, mouse scrolling, and timed pauses to mimic human behavior, it will likely encounter limitations.
